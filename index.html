@@ -6,6 +6,22 @@
   <title>Legaverse Holdings (Pty) Ltd</title>
   <meta name="description" content="Legaverse Holdings (Pty) Ltd — Agriculture, Mining, and Property. Liaising with investors and connecting them to prospective ventures." />
 
+  <!-- ✅ FAVICON (Browser tab icon) -->
+  <link rel="icon" type="image/png" href="Lib/Amended Legaverse Logo Design.png" />
+  <link rel="apple-touch-icon" href="Lib/Amended Legaverse Logo Design.png" />
+
+  <!-- ✅ SOCIAL IMAGE (Open Graph + Twitter) -->
+  <meta property="og:title" content="Legaverse Holdings (Pty) Ltd" />
+  <meta property="og:description" content="Agriculture, Mining, and Property — Investor liaison and venture matching across key sectors." />
+  <meta property="og:image" content="https://legaverseholdings.co.za/Lib/Amended%20Legaverse%20Logo%20Design.png" />
+  <meta property="og:url" content="https://legaverseholdings.co.za" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Legaverse Holdings (Pty) Ltd" />
+  <meta name="twitter:description" content="Agriculture, Mining, and Property — Investor liaison and venture matching across key sectors." />
+  <meta name="twitter:image" content="https://legaverseholdings.co.za/Lib/Amended%20Legaverse%20Logo%20Design.png" />
+
   <style>
     :root{
       --bg: #b0c2e4;
@@ -86,6 +102,7 @@
       color: var(--muted);
     }
 
+    /* Desktop links */
     .nav-links{
       display:flex;
       align-items:center;
@@ -100,6 +117,9 @@
       color: var(--muted);
       font-size: 14px;
       transition: .2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
     .nav-links a:hover{
       color: var(--text);
@@ -142,6 +162,74 @@
     .btn.primary{
       border-color: rgba(0,183,214,.55);
       background: linear-gradient(135deg, rgba(0,183,214,.22), rgba(46,108,246,.18));
+    }
+
+    /* ✅ Mobile nav (hamburger) */
+    .menu-btn{
+      display:none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+    .menu-btn:hover{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.22);
+    }
+    .menu-icon{
+      width: 18px;
+      height: 12px;
+      position: relative;
+    }
+    .menu-icon span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background: rgba(255,255,255,.85);
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+    .menu-icon span:nth-child(1){ top:0; }
+    .menu-icon span:nth-child(2){ top:5px; }
+    .menu-icon span:nth-child(3){ top:10px; }
+
+    .mobile-panel{
+      display:none;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(5,10,18,.72);
+      backdrop-filter: blur(14px);
+    }
+    .mobile-panel .inner{
+      padding: 10px 0 14px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mobile-panel a{
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .mobile-panel a:hover{
+      border-color: rgba(0,183,214,.30);
+      background: rgba(0,183,214,.08);
+    }
+    .mobile-panel .btn{
+      width: 100%;
+      justify-content: center;
+    }
+    .mobile-panel.open{
+      display:block;
     }
 
     /* Video strip after nav */
@@ -204,7 +292,7 @@
 
     /* Hero */
     header.hero{
-      padding: 34px 0 28px; /* reduced since video now sits above */
+      padding: 34px 0 28px;
     }
     .hero-grid{
       display:grid;
@@ -366,18 +454,13 @@
       transform: translateY(-2px);
       border-color: rgba(0,183,214,.30);
     }
-    .card .img{
+    .card > div:first-child img{
+      width: 100%;
       height: 190px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-    .card .img:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
-      pointer-events:none;
+      object-fit: cover;
+      border-radius: 0 !important;
+      border: none !important;
+      display:block;
     }
     .card .content{
       padding: 18px;
@@ -482,10 +565,11 @@
       .grid-2{ grid-template-columns: 1fr; }
       form{ grid-template-columns: 1fr; }
       .brand{ min-width: auto; }
-      .nav-inner{ gap: 10px; }
-      .nav-links{ gap: 8px; }
-      .nav-links a{ padding: 8px 10px; font-size: 13px; }
       .btn{ padding: 10px 12px; }
+
+      /* ✅ Swap desktop nav for hamburger on mobile */
+      .nav-links, .cta{ display:none; }
+      .menu-btn{ display:inline-flex; }
     }
 
     @media (max-width: 520px){
@@ -510,14 +594,33 @@
         </div>
       </a>
 
+      <!-- Desktop Links -->
       <div class="nav-links" id="navLinks">
         <a href="#about">About</a>
         <a href="#sectors">Sectors</a>
         <a href="#contact">Contact</a>
       </div>
 
+      <!-- Desktop CTA -->
       <div class="cta">
         <a class="btn primary" href="#contact">Work With Us</a>
+      </div>
+
+      <!-- ✅ Mobile Hamburger -->
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <div class="menu-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+
+    <!-- ✅ Mobile dropdown -->
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container inner">
+        <a href="#about" class="mLink">About</a>
+        <a href="#sectors" class="mLink">Sectors</a>
+        <a href="#contact" class="mLink">Contact</a>
+        <a class="btn primary mLink" href="#contact">Work With Us</a>
       </div>
     </div>
   </nav>
@@ -526,7 +629,6 @@
   <section class="video-strip" aria-label="Showreel video">
     <div class="container">
       <div class="video-wrap">
-        <!-- Replace video.mp4 with your real file name/path -->
         <video
           src="Lib/Final Hero.mov"
           autoplay
@@ -539,10 +641,6 @@
         <div class="video-overlay"></div>
 
         <div class="video-caption">
-          <div class="cap">
-            <strong>Legaverse Holdings (Pty) Ltd</strong>
-            <span>Investor liaison and venture matching across agriculture, mining, and property.</span>
-          </div>
           <a class="btn primary" href="#sectors">View Sectors</a>
         </div>
       </div>
@@ -649,7 +747,7 @@
       <div class="cards">
         <!-- Agriculture -->
         <article class="card">
-          <div><img src="Lib/agriculture.png" alt="Agriculture" style="border-radius:16px; border:1px solid rgba(255,255,255,.12);" /></div>
+          <div><img src="Lib/agriculture.png" alt="Agriculture" /></div>
           <div class="content">
             <h3>Agriculture</h3>
             <p>
@@ -666,7 +764,7 @@
 
         <!-- Mining -->
         <article class="card">
-            <div><img src="Lib/mining.png" alt="Development" style="border-radius:16px; border:1px solid rgba(255,255,255,.12);" /></div>
+          <div><img src="Lib/mining.png" alt="Mining" /></div>
           <div class="content">
             <h3>Mining</h3>
             <p>
@@ -683,7 +781,7 @@
 
         <!-- Property -->
         <article class="card">
-          <div><img src="Lib/development.png" alt="Development" style="border-radius:16px; border:1px solid rgba(255,255,255,.12);" /></div>
+          <div><img src="Lib/development.png" alt="Property Development" /></div>
           <div class="content">
             <h3>Property</h3>
             <p>
@@ -716,7 +814,6 @@
 
       <div class="grid-2">
         <div class="panel">
-          <!-- ✅ Email app (mailto:) prefill -->
           <form id="contactForm">
             <div>
               <label for="name">Full Name</label>
@@ -801,10 +898,6 @@
     const form = document.getElementById("contactForm");
     const tip = document.getElementById("emailTip");
 
-    function encodeMailto(str) {
-      return encodeURIComponent(str).replace(/%20/g, "+");
-    }
-
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -817,18 +910,45 @@
 
       const body =
         `Hello Legaverse Holdings,%0D%0A%0D%0A` +
-        `${message}%0D%0A%0D%0A` +
+        `${encodeURIComponent(message)}%0D%0A%0D%0A` +
         `---%0D%0A` +
-        `Sender Name: ${name}%0D%0A` +
-        `Sender Email: ${email}%0D%0A`;
+        `Sender Name: ${encodeURIComponent(name)}%0D%0A` +
+        `Sender Email: ${encodeURIComponent(email)}%0D%0A`;
 
       const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
 
       tip.style.display = "inline-flex";
       setTimeout(() => (tip.style.display = "none"), 2500);
 
-      // Opens default email client with pre-filled data
       window.location.href = mailto;
+    });
+
+    // ✅ Mobile nav toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobilePanel = document.getElementById("mobilePanel");
+    const mobileLinks = Array.from(document.querySelectorAll(".mLink"));
+
+    function closeMenu() {
+      mobilePanel.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = mobilePanel.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    // Close menu when a link is clicked
+    mobileLinks.forEach((a) => a.addEventListener("click", closeMenu));
+
+    // Close menu on Escape
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // Close menu if screen is resized back to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) closeMenu();
     });
   </script>
 
