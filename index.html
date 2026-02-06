@@ -1,956 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Legaverse Holdings (Pty) Ltd</title>
-  <meta name="description" content="Legaverse Holdings (Pty) Ltd — Agriculture, Mining, and Property. Liaising with investors and connecting them to prospective ventures." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rev and Reveal</title>
+    
+    <link rel="icon" type="image/png" href="lib/Revlogo.png">
 
-  <!-- ✅ FAVICON (Browser tab icon) -->
-  <link rel="icon" type="image/png" href="Lib/Amended Legaverse Logo Design.png" />
-  <link rel="apple-touch-icon" href="Lib/Amended Legaverse Logo Design.png" />
+    <meta property="og:title" content="Rev and Reveal">
+    <meta property="og:image" content="lib/revweb.png">
+    <meta name="twitter:card" content="summary_large_image">
 
-  <!-- ✅ SOCIAL IMAGE (Open Graph + Twitter) -->
-  <meta property="og:title" content="Legaverse Holdings (Pty) Ltd" />
-  <meta property="og:description" content="Agriculture, Mining, and Property — Investor liaison and venture matching across key sectors." />
-  <meta property="og:image" content="https://legaverseholdings.co.za/Lib/Amended%20Legaverse%20Logo%20Design.png" />
-  <meta property="og:url" content="https://legaverseholdings.co.za" />
-  <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Legaverse Holdings (Pty) Ltd" />
-  <meta name="twitter:description" content="Agriculture, Mining, and Property — Investor liaison and venture matching across key sectors." />
-  <meta name="twitter:image" content="https://legaverseholdings.co.za/Lib/Amended%20Legaverse%20Logo%20Design.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root{
-      --bg: #b0c2e4;
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --accent: #00b7d6;
-      --accent2: #2e6cf6;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
-      --radius: 18px;
-      --max: 1100px;
-    }
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Prevents scrolling */
+            background-color: #000;
+        }
 
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
-      background:
-        radial-gradient(900px 600px at 20% 10%, rgba(0,183,214,.20), transparent 60%),
-        radial-gradient(900px 600px at 80% 20%, rgba(141, 161, 203, 0.18), transparent 60%),
-        linear-gradient(180deg, #071022, #060a12 60%, #05070c);
-      color: var(--text);
-    }
+        /* Full Screen Image Container */
+        .fullscreen-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('lib/revweb.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
 
-    a{ color: inherit; text-decoration: none; }
-    img{ max-width: 100%; display:block; }
+        /* Social Icons Overlay */
+        .social-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 10;
+            display: flex;
+            gap: 20px;
+        }
 
-    /* Layout */
-    .container{
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
+        .social-icon {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            width: 55px;
+            height: 55px;
+            /* Using logo as background for the icon circle */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
 
-    /* Nav */
-    .nav{
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(14px);
-      background: rgba(5,10,18,.62);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 0;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 12px;
-      min-width: 220px;
-    }
-    .brand img{
-      width: 44px;
-      height: 44px;
-      object-fit: contain;
-      border-radius: 10px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      padding: 6px;
-    }
-    .brand .name{
-      display:flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .brand .name strong{
-      letter-spacing: .6px;
-      font-size: 14px;
-    }
-    .brand .name span{
-      font-size: 12px;
-      color: var(--muted);
-    }
+        /* Dark overlay inside the circle to ensure the white icons pop */
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); 
+            border-radius: 50%;
+            z-index: 1;
+        }
 
-    /* Desktop links */
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .nav-links a{
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      color: var(--muted);
-      font-size: 14px;
-      transition: .2s ease;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .nav-links a:hover{
-      color: var(--text);
-      border-color: rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-    }
-    .nav-links a.active{
-      color: var(--text);
-      border-color: rgba(0,183,214,.35);
-      background: rgba(0,183,214,.10);
-    }
+        .social-icon i {
+            position: relative;
+            z-index: 2;
+        }
 
-    .cta{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight: 600;
-      font-size: 14px;
-      transition: .2s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
-      white-space: nowrap;
-      cursor: pointer;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.22);
-    }
-    .btn.primary{
-      border-color: rgba(0,183,214,.55);
-      background: linear-gradient(135deg, rgba(0,183,214,.22), rgba(46,108,246,.18));
-    }
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            border-color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
 
-    /* ✅ Mobile nav (hamburger) */
-    .menu-btn{
-      display:none;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
-    }
-    .menu-btn:hover{
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.22);
-    }
-    .menu-icon{
-      width: 18px;
-      height: 12px;
-      position: relative;
-    }
-    .menu-icon span{
-      position:absolute;
-      left:0;
-      right:0;
-      height:2px;
-      background: rgba(255,255,255,.85);
-      border-radius: 999px;
-      transition: .2s ease;
-    }
-    .menu-icon span:nth-child(1){ top:0; }
-    .menu-icon span:nth-child(2){ top:5px; }
-    .menu-icon span:nth-child(3){ top:10px; }
-
-    .mobile-panel{
-      display:none;
-      border-top: 1px solid rgba(255,255,255,.10);
-      background: rgba(5,10,18,.72);
-      backdrop-filter: blur(14px);
-    }
-    .mobile-panel .inner{
-      padding: 10px 0 14px;
-      display:flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .mobile-panel a{
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-weight: 600;
-    }
-    .mobile-panel a:hover{
-      border-color: rgba(0,183,214,.30);
-      background: rgba(0,183,214,.08);
-    }
-    .mobile-panel .btn{
-      width: 100%;
-      justify-content: center;
-    }
-    .mobile-panel.open{
-      display:block;
-    }
-
-    /* Video strip after nav */
-    .video-strip{
-      padding: 18px 0 6px;
-    }
-    .video-wrap{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-    .video-wrap video{
-      width: 100%;
-      height: clamp(210px, 35vw, 420px);
-      object-fit: cover;
-      display:block;
-    }
-    .video-overlay{
-      position:absolute;
-      inset:0;
-      background: radial-gradient(900px 400px at 15% 15%, rgba(0,183,214,.18), transparent 60%),
-                  linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.45));
-      pointer-events:none;
-    }
-    .video-caption{
-      position:absolute;
-      left: 18px;
-      bottom: 16px;
-      right: 18px;
-      display:flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      z-index: 2;
-    }
-    .video-caption .cap{
-      display:inline-flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(5,10,18,.45);
-      backdrop-filter: blur(10px);
-      max-width: 650px;
-    }
-    .video-caption .cap strong{
-      font-size: 14px;
-      letter-spacing: .3px;
-    }
-    .video-caption .cap span{
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    /* Hero */
-    header.hero{
-      padding: 34px 0 28px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-    .hero-card{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute;
-      inset: -120px -120px auto auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle at 30% 30%, rgba(0,183,214,.45), transparent 60%);
-      opacity: .85;
-      pointer-events:none;
-    }
-    .kicker{
-      display:inline-flex;
-      gap: 10px;
-      align-items:center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size: 13px;
-      width: fit-content;
-    }
-    .hero h1{
-      margin: 14px 0 10px;
-      font-size: clamp(28px, 3.4vw, 46px);
-      letter-spacing: .2px;
-      line-height: 1.08;
-    }
-    .hero p{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 62ch;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    /* Side panel */
-    .side{
-      display:flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .mini-card{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 10px 36px rgba(0,0,0,.22);
-    }
-    .mini-card h3{
-      margin: 0 0 8px;
-      font-size: 15px;
-      letter-spacing: .4px;
-    }
-    .mini-card p{
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
-    }
-    .badges{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    .badge{
-      font-size: 12px;
-      color: rgba(255,255,255,.78);
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-    }
-
-    /* Sections */
-    section{
-      padding: 42px 0;
-    }
-    .section-title{
-      display:flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .section-title h2{
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: .3px;
-    }
-    .section-title p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 60ch;
-      line-height: 1.5;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-    .panel{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: 0 10px 36px rgba(0,0,0,.22);
-    }
-    .panel p{ color: var(--muted); line-height: 1.6; margin: 0; }
-    .panel ul{
-      margin: 14px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .panel li{ margin: 6px 0; }
-
-    /* Sectors gallery */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-    .card{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: 0 14px 44px rgba(0,0,0,.26);
-      transition: transform .2s ease, border-color .2s ease;
-    }
-    .card:hover{
-      transform: translateY(-2px);
-      border-color: rgba(0,183,214,.30);
-    }
-    .card > div:first-child img{
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      border-radius: 0 !important;
-      border: none !important;
-      display:block;
-    }
-    .card .content{
-      padding: 18px;
-    }
-    .card h3{
-      margin: 0 0 8px;
-      font-size: 16px;
-      letter-spacing: .2px;
-    }
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 14px;
-    }
-    .pill-row{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    .pill{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.78);
-    }
-
-    /* Contact */
-    form{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .full{ grid-column: 1 / -1; }
-    label{
-      font-size: 12px;
-      color: rgba(255,255,255,.70);
-      display:block;
-      margin-bottom: 6px;
-    }
-    input, textarea{
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(5,10,18,.35);
-      color: var(--text);
-      outline: none;
-    }
-    textarea{ min-height: 120px; resize: vertical; }
-    input:focus, textarea:focus{
-      border-color: rgba(0,183,214,.45);
-      box-shadow: 0 0 0 4px rgba(0,183,214,.10);
-    }
-    .form-actions{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      justify-content: flex-start;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-    .note{
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-    .success{
-      font-size: 12px;
-      color: rgba(255,255,255,.85);
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,183,214,.35);
-      background: rgba(0,183,214,.10);
-      display:none;
-    }
-
-    /* Footer */
-    footer{
-      padding: 26px 0 40px;
-      color: rgba(255,255,255,.55);
-      border-top: 1px solid rgba(255,255,255,.10);
-      margin-top: 24px;
-    }
-    .footer-inner{
-      display:flex;
-      gap: 12px;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* Mobile responsive improvements */
-    @media (max-width: 900px){
-      .container{ width: min(var(--max), calc(100% - 28px)); }
-      .hero-grid{ grid-template-columns: 1fr; }
-      .cards{ grid-template-columns: 1fr; }
-      .grid-2{ grid-template-columns: 1fr; }
-      form{ grid-template-columns: 1fr; }
-      .brand{ min-width: auto; }
-      .btn{ padding: 10px 12px; }
-
-      /* ✅ Swap desktop nav for hamburger on mobile */
-      .nav-links, .cta{ display:none; }
-      .menu-btn{ display:inline-flex; }
-    }
-
-    @media (max-width: 520px){
-      .brand .name span{ display:none; }
-      .brand img{ width: 40px; height: 40px; }
-      .video-caption{ left: 12px; right: 12px; bottom: 12px; }
-      .video-caption .cap{ padding: 9px 10px; }
-    }
-  </style>
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            .social-overlay {
+                bottom: 25px;
+                left: 25px;
+                gap: 15px;
+            }
+            .social-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#top" aria-label="Legaverse Holdings Home">
-        <img src="Lib/Amended Legaverse Logo Design.png" alt="Legaverse Holdings Logo" />
-        <div class="name">
-          <strong>LEGAVERSE HOLDINGS</strong>
-          <span>Agriculture • Mining • Property</span>
-        </div>
-      </a>
+    <div class="fullscreen-bg"></div>
 
-      <!-- Desktop Links -->
-      <div class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#sectors">Sectors</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <!-- Desktop CTA -->
-      <div class="cta">
-        <a class="btn primary" href="#contact">Work With Us</a>
-      </div>
-
-      <!-- ✅ Mobile Hamburger -->
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-        <div class="menu-icon" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </div>
-      </button>
+    <div class="social-overlay">
+        <a href="https://www.instagram.com/revandreveal_sa/" target="_blank" class="social-icon" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/@RevandReveal_SA" target="_blank" class="social-icon" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+        </a>
     </div>
-
-    <!-- ✅ Mobile dropdown -->
-    <div class="mobile-panel" id="mobilePanel">
-      <div class="container inner">
-        <a href="#about" class="mLink">About</a>
-        <a href="#sectors" class="mLink">Sectors</a>
-        <a href="#contact" class="mLink">Contact</a>
-        <a class="btn primary mLink" href="#contact">Work With Us</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ✅ VIDEO SECTION (AFTER NAV) -->
-  <section class="video-strip" aria-label="Showreel video">
-    <div class="container">
-      <div class="video-wrap">
-        <video
-          src="Lib/Final Hero.mov"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
-
-        <div class="video-overlay"></div>
-
-        <div class="video-caption">
-          <a class="btn primary" href="#sectors">View Sectors</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HERO -->
-  <header class="hero" id="top">
-    <div class="container hero-grid">
-      <div class="hero-card">
-        <div class="kicker">Investor Liaison • Venture Matching • Deal Support</div>
-        <h1>Connecting investors to high-potential ventures across key sectors.</h1>
-        <p>
-          Legaverse Holdings (Pty) Ltd is a holdings group operating across <strong>Agriculture</strong>,
-          <strong>Mining</strong>, and <strong>Property</strong>. We primarily liaise with potential investors and
-          assist in identifying prospective ventures within our portfolio and broader network.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn primary" href="#sectors">Explore Our Sectors</a>
-          <a class="btn" href="#about">Learn More</a>
-        </div>
-      </div>
-
-      <div class="side">
-        <div class="mini-card">
-          <h3>What we do</h3>
-          <p>
-            We support investors through the discovery process, clarifying opportunities, coordinating discussions,
-            and helping match capital to the right ventures.
-          </p>
-          <div class="badges">
-            <span class="badge">Investor introductions</span>
-            <span class="badge">Opportunity screening</span>
-            <span class="badge">Stakeholder coordination</span>
-            <span class="badge">Sector insights</span>
-          </div>
-        </div>
-
-        <div class="mini-card">
-          <h3>Our focus</h3>
-          <p>
-            Practical opportunities, transparent communication, and long-term value creation across strategic industries.
-          </p>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h2>About Legaverse Holdings</h2>
-          <p>
-            We operate as a connector and facilitator, aligning investor interests with opportunities and
-            supporting clear engagement from first contact through exploration.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="panel">
-          <p>
-            Our role is to help investors discover ventures that match their goals, risk profile, and timeline.
-            We prioritize professional liaison, structured communication, and a streamlined introduction process.
-          </p>
-          <ul>
-            <li>Curate opportunities across agriculture, mining, and property</li>
-            <li>Facilitate engagement and coordinate stakeholder discussions</li>
-            <li>Support investors in identifying the right venture fit</li>
-          </ul>
-        </div>
-
-        <div class="panel">
-          <p>
-            Whether you are looking for scalable projects, asset-backed opportunities, or strategic entry points into
-            growth industries, we help you navigate options within our arsenal and connect you to the right people.
-          </p>
-          <ul>
-            <li>Investor-ready communication</li>
-            <li>Sector-specific opportunity matching</li>
-            <li>Relationship-driven deal support</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTORS / GALLERY -->
-  <section id="sectors">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h2>Our Sectors</h2>
-          <p>
-            We operate across three core sectors. Below is a snapshot of our focus areas and how we support investors
-            within each space.
-          </p>
-        </div>
-      </div>
-
-      <div class="cards">
-        <!-- Agriculture -->
-        <article class="card">
-          <div><img src="Lib/agriculture.png" alt="Agriculture" /></div>
-          <div class="content">
-            <h3>Agriculture</h3>
-            <p>
-              Supporting agricultural ventures across production, processing, and supply chains. We help investors find
-              practical opportunities with clear scalability and demand.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Farming & Production</span>
-              <span class="pill">Agri-processing</span>
-              <span class="pill">Supply & Distribution</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Mining -->
-        <article class="card">
-          <div><img src="Lib/mining.png" alt="Mining" /></div>
-          <div class="content">
-            <h3>Mining</h3>
-            <p>
-              Linking investors to mining-related ventures and prospects through structured liaison and opportunity screening,
-              ensuring the right fit and stakeholder alignment.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Prospecting Support</span>
-              <span class="pill">Stakeholder Liaison</span>
-              <span class="pill">Venture Matching</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Property -->
-        <article class="card">
-          <div><img src="Lib/development.png" alt="Property Development" /></div>
-          <div class="content">
-            <h3>Property</h3>
-            <p>
-              Assisting investors in identifying property ventures and opportunities across development, acquisitions,
-              and strategic portfolio expansion.
-            </p>
-            <div class="pill-row">
-              <span class="pill">Development</span>
-              <span class="pill">Acquisition</span>
-              <span class="pill">Portfolio Growth</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h2>Contact Us</h2>
-          <p>
-            Fill in the form and when you press <strong>Send Message</strong>, it will open your email app with the details
-            pre-filled to send to <strong>legaverseholdings@outlook.com</strong>.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="panel">
-          <form id="contactForm">
-            <div>
-              <label for="name">Full Name</label>
-              <input id="name" name="name" type="text" placeholder="Your full name" required />
-            </div>
-
-            <div>
-              <label for="email">Email Address</label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" required />
-            </div>
-
-            <div class="full">
-              <label for="subject">Subject</label>
-              <input id="subject" name="subject" type="text" placeholder="Investor enquiry / Opportunity request / Partnership" />
-            </div>
-
-            <div class="full">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Briefly describe what you are looking for..." required></textarea>
-            </div>
-
-            <div class="full form-actions">
-              <button class="btn primary" type="submit">Send Message</button>
-              <span class="success" id="emailTip">Opening your email app…</span>
-              <span class="note">
-                Note: This uses your device email app (mailto). Your email app will open with the message pre-filled.
-              </span>
-            </div>
-          </form>
-        </div>
-
-        <div class="panel">
-          <p style="margin-bottom: 12px;">
-            Prefer direct contact?
-          </p>
-
-          <ul style="margin: 0; padding-left: 18px;">
-            <li><strong>Company:</strong> Legaverse Holdings (Pty) Ltd</li>
-            <li><strong>Email:</strong> legaverseholdings@outlook.com</li>
-            <li><strong>Phone:</strong> +27 81 461 6320</li>
-            <li><strong>Location:</strong> South Africa</li>
-          </ul>
-
-          <div class="badges" style="margin-top: 14px;">
-            <span class="badge">Investor Liaison</span>
-            <span class="badge">Opportunity Matching</span>
-            <span class="badge">Agriculture</span>
-            <span class="badge">Mining</span>
-            <span class="badge">Property</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Legaverse Holdings (Pty) Ltd. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Active nav link highlight on scroll
-    const links = Array.from(document.querySelectorAll("#navLinks a"));
-    const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
-
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const id = "#" + entry.target.id;
-        links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === id));
-      });
-    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
-
-    sections.forEach(sec => obs.observe(sec));
-
-    // ✅ Contact form -> open user's email app (mailto) with prefilled content
-    const form = document.getElementById("contactForm");
-    const tip = document.getElementById("emailTip");
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const subject = document.getElementById("subject").value.trim() || "Legaverse Holdings Enquiry";
-      const message = document.getElementById("message").value.trim();
-
-      const to = "legaverseholdings@outlook.com";
-
-      const body =
-        `Hello Legaverse Holdings,%0D%0A%0D%0A` +
-        `${encodeURIComponent(message)}%0D%0A%0D%0A` +
-        `---%0D%0A` +
-        `Sender Name: ${encodeURIComponent(name)}%0D%0A` +
-        `Sender Email: ${encodeURIComponent(email)}%0D%0A`;
-
-      const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
-
-      tip.style.display = "inline-flex";
-      setTimeout(() => (tip.style.display = "none"), 2500);
-
-      window.location.href = mailto;
-    });
-
-    // ✅ Mobile nav toggle
-    const menuBtn = document.getElementById("menuBtn");
-    const mobilePanel = document.getElementById("mobilePanel");
-    const mobileLinks = Array.from(document.querySelectorAll(".mLink"));
-
-    function closeMenu() {
-      mobilePanel.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded", "false");
-    }
-
-    menuBtn.addEventListener("click", () => {
-      const isOpen = mobilePanel.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
-
-    // Close menu when a link is clicked
-    mobileLinks.forEach((a) => a.addEventListener("click", closeMenu));
-
-    // Close menu on Escape
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-
-    // Close menu if screen is resized back to desktop
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 900) closeMenu();
-    });
-  </script>
 
 </body>
 </html>
