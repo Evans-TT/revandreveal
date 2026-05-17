@@ -1,125 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rev and Reveal</title>
-    
-    <link rel="icon" type="image/png" href="Lib/Revlogo.png">
+  <meta charset="UTF-8" />
 
-    <meta property="og:title" content="Rev and Reveal">
-    <meta property="og:image" content="Lib/Revlogo.png">
-    <meta name="twitter:card" content="summary_large_image">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- PRIMARY SEO -->
+  <title>REV & REVEAL | Where Passion Meets Performance</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta
+    name="description"
+    content="REV & REVEAL is a premium South African automotive entertainment platform showcasing car culture, builds, interviews, performance lifestyle and cinematic automotive content."
+  />
 
-        body, html {
-            height: 100%;
-            width: 100%;
-            overflow: hidden; /* Prevents scrolling */
-            background-color: #000;
-        }
+  <meta
+    name="keywords"
+    content="REV AND REVEAL, automotive culture, South African cars, modified cars, car interviews, automotive media, car lifestyle, BMW culture, performance cars"
+  />
 
-        /* Full Screen Image Container */
-        .fullscreen-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('Lib/revweb.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 1;
-        }
+  <meta name="author" content="REV & REVEAL" />
 
-        /* Social Icons Overlay */
-        .social-overlay {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            z-index: 10;
-            display: flex;
-            gap: 20px;
-        }
+  <!-- FAVICON -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon.png"
+  />
 
-        .social-icon {
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-            width: 55px;
-            height: 55px;
-            /* Using logo as background for the icon circle */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-        }
+  <!-- OPEN GRAPH / SOCIAL SHARING -->
+  <meta
+    property="og:title"
+    content="REV & REVEAL"
+  />
 
-        /* Dark overlay inside the circle to ensure the white icons pop */
-        .social-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4); 
-            border-radius: 50%;
-            z-index: 1;
-        }
+  <meta
+    property="og:description"
+    content="Where Passion Meets Performance."
+  />
 
-        .social-icon i {
-            position: relative;
-            z-index: 2;
-        }
+  <meta
+    property="og:image"
+    content="https://revandreveal.co.za/social-preview.jpg"
+  />
 
-        .social-icon:hover {
-            transform: translateY(-5px) scale(1.1);
-            border-color: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
+  <meta
+    property="og:url"
+    content="https://revandreveal.co.za"
+  />
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 600px) {
-            .social-overlay {
-                bottom: 25px;
-                left: 25px;
-                gap: 15px;
-            }
-            .social-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
-            }
-        }
-    </style>
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <!-- TWITTER / X -->
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content="REV & REVEAL"
+  />
+
+  <meta
+    name="twitter:description"
+    content="Where Passion Meets Performance."
+  />
+
+  <meta
+    name="twitter:image"
+    content="https://revandreveal.co.za/social-preview.jpg"
+  />
+
+  <!-- THEME COLOR -->
+  <meta
+    name="theme-color"
+    content="#ff2020"
+  />
+
+  <script type="module" src="/src/main.jsx"></script>
 </head>
+
 <body>
-
-    <div class="fullscreen-bg"></div>
-
-    <div class="social-overlay">
-        <a href="https://www.instagram.com/revandreveal_sa/" target="_blank" class="social-icon" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/@RevandReveal_SA" target="_blank" class="social-icon" aria-label="YouTube">
-            <i class="fab fa-youtube"></i>
-        </a>
-    </div>
-
+  <div id="root"></div>
 </body>
 </html>
